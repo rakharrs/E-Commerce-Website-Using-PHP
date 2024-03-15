@@ -1,9 +1,9 @@
 <?php
 
-$servername = "localhost:8889";
+$servername = "roundhouse.proxy.rlwy.net:36748";
 $username = "root";
-$password = "root";
-$dbname = "ebuybd";
+$password = "LQBeFEOoricWqpgdirGvXHqPUMVewHqi";
+$dbname = "railway";
 $success;
 
 try {
