@@ -7,21 +7,21 @@ if (!isset($_SESSION['user_login'])) {
 }
 else {
 	$user = $_SESSION['user_login'];
-	$result = mysql_query("SELECT * FROM user WHERE id='$user'");
-		$get_user_email = mysql_fetch_assoc($result);
+	$result = mysqli_query($success, "SELECT * FROM user WHERE id='$user'");
+		$get_user_email = mysqli_fetch_assoc($result);
 			$uname_db = $get_user_email['firstName'];
 }
 if (isset($_REQUEST['pid'])) {
 	
-	$pid = mysql_real_escape_string($_REQUEST['pid']);
+	$pid = mysqli_real_escape_string($success, $_REQUEST['pid']);
 }else {
 	header('location: index.php');
 }
 
 
-$getposts = mysql_query("SELECT * FROM products WHERE id ='$pid'") or die(mysql_error());
-					if (mysql_num_rows($getposts)) {
-						$row = mysql_fetch_assoc($getposts);
+$getposts = mysqli_query($success, "SELECT * FROM products WHERE id ='$pid'") or die(mysqli_error());
+					if (mysqli_num_rows($getposts)) {
+						$row = mysqli_fetch_assoc($getposts);
 						$id = $row['id'];
 						$pName = $row['pName'];
 						$price = $row['price'];
@@ -97,10 +97,10 @@ $getposts = mysql_query("SELECT * FROM products WHERE id ='$pid'") or die(mysql_
 		<h3 style="padding-bottom: 20px">Recommand Product For You:</h3>
 		<div>
 		<?php 
-			$getposts = mysql_query("SELECT * FROM products WHERE available >='1' AND id != '".$pid."' AND item ='".$item."'  ORDER BY RAND() LIMIT 3") or die(mysql_error());
-					if (mysql_num_rows($getposts)) {
+			$getposts = mysqli_query($success, "SELECT * FROM products WHERE available >='1' AND id != '".$pid."' AND item ='".$item."'  ORDER BY RAND() LIMIT 3") or die(mysqli_error());
+					if (mysqli_num_rows($getposts)) {
 					echo '<ul id="recs">';
-					while ($row = mysql_fetch_assoc($getposts)) {
+					while ($row = mysqli_fetch_assoc($getposts)) {
 						$id = $row['id'];
 						$pName = $row['pName'];
 						$price = $row['price'];
